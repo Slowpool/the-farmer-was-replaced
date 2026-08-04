@@ -1,0 +1,5 @@
+LEFT_LOWER_CORNER = (0, 0)
+LEFT_UPPER_CORNER =  (0, get_world_size() - 1)
+RIGHT_LOWER_CORNER =  (get_world_size() - 1, 0)
+RIGHT_UPPER_CORNER = (get_world_size() - 1, get_world_size() - 1)
+CORNER_POSITIONS = (LEFT_LOWER_CORNER, LEFT_UPPER_CORNER, RIGHT_LOWER_CORNER, RIGHT_UPPER_CORNER)
