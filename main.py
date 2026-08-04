@@ -336,12 +336,12 @@ seeds = [Entities.Grass, Entities.Carrot, Entities.Grass, Entities.Carrot, Entit
 	
 #seeds = [Entities.Cactus, Entities.Cactus, Entities.Cactus, Entities.Cactus, Entities.Cactus, Entities.Cactus, Entities.Cactus, Entities.Cactus, Entities.Cactus]
 
-while True:
-	# plantAsRings(seeds)
+# while True:
+# 	# plantAsRings(seeds)
 
-	plantInColumnByDrones(seeds)
+# 	plantInColumnByDrones(seeds)
 
-	# huntTheTreasure()
+# 	# huntTheTreasure()
 
 # harvest()
 # plant(Entities.Pumpkin)

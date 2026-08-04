@@ -1,0 +1,3 @@
+import pumpkins
+
+pumpkins.startPumpking()

@@ -11,6 +11,8 @@ def getCurrentPosition():
 	return {'x' : get_pos_x(), 'y' : get_pos_y()}
 
 def moveTo(x, y):
+	x = x % get_world_size()
+	y = y % get_world_size()
 	halfOfWorldSize = get_world_size() / 2
 
 	currentX = get_pos_x()
