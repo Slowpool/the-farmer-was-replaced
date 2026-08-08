@@ -10,6 +10,9 @@ def isCorner():
 def getCurrentPosition():
 	return {'x' : get_pos_x(), 'y' : get_pos_y()}
 
+def moveToPoint(point):
+	moveTo(point['x'], point['y'])
+
 def moveTo(x, y):
 	x = x % get_world_size()
 	y = y % get_world_size()
@@ -71,3 +74,6 @@ def leftFrom(direction):
 	elif direction == East:
 		direction = North
 	return direction
+
+def newPoint(x, y):
+	return {'x' : x, 'y' : y}
