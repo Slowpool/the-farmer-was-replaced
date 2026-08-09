@@ -5,82 +5,82 @@ fieldWidthForOneDrone = None
 deadPumpkins = []
 
 def startPumpking():
-    startPositionsForSubdrones = calculatePositionsForSubdrones()
-    print(startPositionsForSubdrones)
-    placeSubrones(startPositionsForSubdrones)
-    plantPumpkinsAsMaster()
+	startPositionsForSubdrones = calculatePositionsForSubdrones()
+	print(startPositionsForSubdrones)
+	placeSubrones(startPositionsForSubdrones)
+	plantPumpkinsAsMaster()
 
 def calculatePositionsForSubdrones():
 
-    global relativeStartPoint
-    global fieldWidthForOneDrone
-    relativeStartPoint = utils.getCurrentPosition()
-    
-    fieldWidthForOneDrone = calculateFieldWidthForOneDrone()
+	global relativeStartPoint
+	global fieldWidthForOneDrone
+	relativeStartPoint = utils.getCurrentPosition()
+	
+	fieldWidthForOneDrone = calculateFieldWidthForOneDrone()
 
-    currentX = relativeStartPoint['x']
-    startPositionsForSubdrones = []
-    for i in range(max_drones() - 1):
-        currentX += fieldWidthForOneDrone
-        nextSubdronePosition = utils.newPoint(currentX, relativeStartPoint['y'])
-        startPositionsForSubdrones.append(nextSubdronePosition)
-    return startPositionsForSubdrones
+	currentX = relativeStartPoint['x']
+	startPositionsForSubdrones = []
+	for i in range(max_drones() - 1):
+		currentX += fieldWidthForOneDrone
+		nextSubdronePosition = utils.newPoint(currentX, relativeStartPoint['y'])
+		startPositionsForSubdrones.append(nextSubdronePosition)
+	return startPositionsForSubdrones
 
 def calculateFieldWidthForOneDrone():
-    return get_world_size() / max_drones()
+	return get_world_size() / max_drones()
 
 def placeSubrones(startPositionsForSubdrones):
-    for startPositionForSubdrone in startPositionsForSubdrones:
-        placeSubdrone(startPositionForSubdrone)
+	for startPositionForSubdrone in startPositionsForSubdrones:
+		placeSubdrone(startPositionForSubdrone)
 
 def placeSubdrone(startPoint):
-    utils.moveToPoint(startPoint)
-    def plantPumpkinsAsSubdrone():
-        ownStartPoint = startPoint
-        # TODO use startPoint somehow
-        while True:
-            plantPumpkinsOnOwnTerritory()
-            traverseOwnDeadPumpkinsFirstTime()
-            while len(deadPumpkins) != 0:
-                traverseOwnDeadPumpkins()
-            # TODO help neighbour?
-            waitForTheBiggestPumpkinHarvesting()
-    spawn_drone(plantPumpkinsAsSubdrone)
+	utils.moveToPoint(startPoint)
+	def plantPumpkinsAsSubdrone():
+		ownStartPoint = startPoint
+		# TODO use startPoint somehow
+		while True:
+			plantPumpkinsOnOwnTerritory()
+			traverseOwnDeadPumpkinsFirstTime()
+			while len(deadPumpkins) != 0:
+				traverseOwnDeadPumpkins()
+			# TODO help neighbour?
+			waitForTheBiggestPumpkinHarvesting()
+	spawn_drone(plantPumpkinsAsSubdrone)
 
 def plantPumpkinsAsMaster():
-    global relativeStartPoint
-    utils.moveToPoint(relativeStartPoint)
-    while True:
-        plantPumpkinsOnOwnTerritory()
-        traverseOwnDeadPumpkinsFirstTime()
-        while len(deadPumpkins) != 0:
-            traverseOwnDeadPumpkins()
-        while theBiggestPumpkinIsGrown() != True:
-            observeTheBiggestPumpkin()
-        harvest()
+	global relativeStartPoint
+	utils.moveToPoint(relativeStartPoint)
+	while True:
+		plantPumpkinsOnOwnTerritory()
+		traverseOwnDeadPumpkinsFirstTime()
+		while len(deadPumpkins) != 0:
+			traverseOwnDeadPumpkins()
+		while theBiggestPumpkinIsGrown() != True:
+			observeTheBiggestPumpkin()
+		harvest()
 
 def plantPumpkinsOnOwnTerritory():
-    # TODO
-    pass
+	# TODO
+	pass
 
 def traverseOwnDeadPumpkinsFirstTime():
-    # TODO
-    pass
+	# TODO
+	pass
 def traverseOwnDeadPumpkins():
-    # TODO
-    pass
+	# TODO
+	pass
 
 def waitForTheBiggestPumpkinHarvesting():
-    # TODO
-    pass
+	# TODO
+	pass
 
 def theBiggestPumpkinIsGrown():
-    # TODO
-    pass
+	# TODO
+	pass
 
 def observeTheBiggestPumpkin():
-    # TODO
-    pass
+	# TODO
+	pass
 
 if __name__ == '__main__':
-    startPumpking()
+	startPumpking()

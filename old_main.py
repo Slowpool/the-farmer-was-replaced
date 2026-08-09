@@ -318,11 +318,11 @@ enableCompanions = False
 
 #seeds = [Entities.Pumpkin, Entities.Pumpkin, Entities.Pumpkin, Entities.Pumpkin, Entities.Pumpkin, Entities.Pumpkin, Entities.Pumpkin, Entities.Pumpkin]
 	
-seeds = [Entities.Grass, Entities.Carrot, Entities.Tree, Entities.Carrot, Entities.Grass, Entities.Carrot, Entities.Tree]
+#seeds = [Entities.Grass, Entities.Carrot, Entities.Tree, Entities.Carrot, Entities.Grass, Entities.Carrot, Entities.Tree]
 	
 #seeds = [Entities.Carrot, Entities.Carrot, Entities.Carrot, Entities.Carrot, Entities.Carrot, Entities.Carrot, Entities.Carrot, Entities.Carrot]
 
-seeds = [Entities.Grass, Entities.Carrot, Entities.Grass, Entities.Carrot, Entities.Grass, Entities.Carrot, Entities.Grass, Entities.Carrot]
+#seeds = [Entities.Grass, Entities.Carrot, Entities.Grass, Entities.Carrot, Entities.Grass, Entities.Carrot, Entities.Grass, Entities.Carrot]
 
 #seeds = [Entities.Tree, Entities.Bush, Entities.Tree, Entities.Bush, Entities.Tree, Entities.Bush, Entities.Tree, Entities.Bush]
 
@@ -330,18 +330,19 @@ seeds = [Entities.Grass, Entities.Carrot, Entities.Grass, Entities.Carrot, Entit
 	
 #seeds = [Entities.Tree, Entities.Carrot, Entities.Tree, Entities.Carrot, Entities.Tree, Entities.Carrot, Entities.Tree, Entities.Carrot]
 
-#seeds = [Entities.Grass, Entities.Grass, Entities.Grass, Entities.Grass, Entities.Grass, Entities.Grass, Entities.Grass, Entities.Grass]
+seeds = [Entities.Grass, Entities.Grass, Entities.Grass, Entities.Grass, Entities.Grass, Entities.Grass, Entities.Grass, Entities.Grass]
 
 #seeds = [Entities.Sunflower, Entities.Sunflower, Entities.Sunflower, Entities.Sunflower, Entities.Sunflower, Entities.Sunflower, Entities.Sunflower, Entities.Sunflower]
 	
 #seeds = [Entities.Cactus, Entities.Cactus, Entities.Cactus, Entities.Cactus, Entities.Cactus, Entities.Cactus, Entities.Cactus, Entities.Cactus, Entities.Cactus]
 
-# while True:
-# 	# plantAsRings(seeds)
+clear()
+while True:
+	# plantAsRings(seeds)
 
-# 	plantInColumnByDrones(seeds)
+	plantInColumnByDrones(seeds)
 
-# 	# huntTheTreasure()
+	# huntTheTreasure()
 
 # harvest()
 # plant(Entities.Pumpkin)
