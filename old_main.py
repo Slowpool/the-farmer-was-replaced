@@ -104,7 +104,7 @@ def buildCompanionsListValue(companionX, companionY):
 	return (companionX, companionY)
 
 def shouldTill(seed):
-	return get_ground_type() != Grounds.Soil and (seed == Entities.Carrot or seed == Entities.Pumpkin or seed == Entities.Cactus)
+	return get_ground_type() != Grounds.Soil and (seed == Entities.Carrot or seed == Entities.Pumpkin or seed == Entities.Cactus or seed == Entities.Sunflower)
 
 def plantInTheRing(seed, ringSize):
 	for i in range(4):
@@ -328,15 +328,15 @@ enableCompanions = False
 
 #seeds = [Entities.Tree, Entities.Tree, Entities.Tree, Entities.Tree, Entities.Tree, Entities.Tree, Entities.Tree, Entities.Tree]
 	
-#seeds = [Entities.Tree, Entities.Carrot, Entities.Tree, Entities.Carrot, Entities.Tree, Entities.Carrot, Entities.Tree, Entities.Carrot]
+# seeds = [Entities.Tree, Entities.Carrot, Entities.Tree, Entities.Carrot, Entities.Tree, Entities.Carrot, Entities.Tree, Entities.Carrot]
 
-seeds = [Entities.Grass, Entities.Grass, Entities.Grass, Entities.Grass, Entities.Grass, Entities.Grass, Entities.Grass, Entities.Grass]
+#seeds = [Entities.Grass, Entities.Grass, Entities.Grass, Entities.Grass, Entities.Grass, Entities.Grass, Entities.Grass, Entities.Grass]
 
-#seeds = [Entities.Sunflower, Entities.Sunflower, Entities.Sunflower, Entities.Sunflower, Entities.Sunflower, Entities.Sunflower, Entities.Sunflower, Entities.Sunflower]
+seeds = [Entities.Sunflower, Entities.Sunflower, Entities.Sunflower, Entities.Sunflower, Entities.Sunflower, Entities.Sunflower, Entities.Sunflower, Entities.Sunflower]
 	
 #seeds = [Entities.Cactus, Entities.Cactus, Entities.Cactus, Entities.Cactus, Entities.Cactus, Entities.Cactus, Entities.Cactus, Entities.Cactus, Entities.Cactus]
 
-clear()
+# clear()
 while True:
 	# plantAsRings(seeds)
 

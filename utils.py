@@ -10,7 +10,7 @@ def isCorner():
 def getCurrentPosition():
 	return {'x' : get_pos_x(), 'y' : get_pos_y()}
 
-def moveToPoint(point):
+def moveToPosition(point):
 	moveTo(point['x'], point['y'])
 
 def moveTo(x, y):

@@ -7,6 +7,8 @@ LEFT_HORIZONTAL_BOUNDARY = 'LEFT_HORIZONTAL_BOUNDARY'
 NOT_HORIZONTAL_BOUNDARY = 'NOT_HORIZONTAL_BOUNDARY'
 RIGHT_HORIZONTAL_BOUNDARY = 'RIGHT_HORIZONTAL_BOUNDARY'
 
+MIN_THE_BIGGEST_PUMPKIN_PROBES = get_world_size() / 2
+
 ownStartPoint = None
 deadPumpkins = []
 
@@ -34,14 +36,13 @@ def placeSubrones(startPositionsForSubdrones):
 		placeSubdrone(startPositionForSubdrone)
 
 def placeSubdrone(startPoint):
-	utils.moveToPoint(startPoint)
+	utils.moveToPosition(startPoint)
 	def plantPumpkinsAsSubdrone():
 		global ownStartPoint
 		ownStartPoint = startPoint
 		while True:
 			plantPumpkinsOnOwnTerritory()
 			traverseOwnDeadPumpkinsFirstTime()
-			# TODO here i stopped
 			while thereAreDeadPumpkins():
 				traverseOwnDeadPumpkins()
 			# TODO help neighbour?
@@ -50,19 +51,22 @@ def placeSubdrone(startPoint):
 
 def plantPumpkinsAsMaster():
 	global ownStartPoint
-	utils.moveToPoint(ownStartPoint)
+	utils.moveToPosition(ownStartPoint)
+	theBiggestPumpkinProbes = []
 	while True:
 		plantPumpkinsOnOwnTerritory()
 		traverseOwnDeadPumpkinsFirstTime()
-		while len(deadPumpkins) != 0:
+		while thereAreDeadPumpkins():
 			traverseOwnDeadPumpkins()
-		while theBiggestPumpkinIsGrown() != True:
-			observeTheBiggestPumpkin()
+		while not theBiggestPumpkinIsGrown(theBiggestPumpkinProbes):
+			clearTheBiggestPumpkinProbes(theBiggestPumpkinProbes)
+			collectTheBiggestPumpkinInfo(theBiggestPumpkinProbes)
 		harvest()
+
 
 def plantPumpkinsOnOwnTerritory():
 	global ownStartPoint
-	utils.moveToPoint(ownStartPoint)
+	utils.moveToPosition(ownStartPoint)
 	for i in range(NUMBER_OF_CELLS_PER_DRONE):
 		plantPumpkin()
 		goToNextCell()
@@ -123,20 +127,50 @@ def thereAreDeadPumpkins():
 	return len(deadPumpkins) != 0
 
 def traverseOwnDeadPumpkins():
-	# TODO
-	pass
+	for deadPumpkinPosition in deadPumpkins:
+		utils.moveToPosition(deadPumpkinPosition)
+		if isDeadPumpkin():
+			plantPumpkin()
+		else:
+			forgetDeadPumpkin(deadPumpkinPosition)
+
+def forgetDeadPumpkin(position):
+	deadPumpkins.remove(position)
 
 def waitForTheBiggestPumpkinHarvesting():
-	# TODO
-	pass
+	while thereIsPumpkinBeneath():
+		pass
 
-def theBiggestPumpkinIsGrown():
-	# TODO
-	pass
+def thereIsPumpkinBeneath():
+	return get_entity_type() == Entities.Pumpkin
 
-def observeTheBiggestPumpkin():
-	# TODO
-	pass
+def theBiggestPumpkinIsGrown(theBiggestPumpkinProbes):
+	if len(theBiggestPumpkinProbes) < MIN_THE_BIGGEST_PUMPKIN_PROBES:
+		return False
+
+	prevPumpkinProbe = theBiggestPumpkinProbes[0]
+	for i in range(len(theBiggestPumpkinProbes) - 1):
+		if prevPumpkinProbe != theBiggestPumpkinProbes[i + 1]:
+			return False
+		else:
+			# theBiggestPumpkinProbes[i + 1] copy-pasted in optimization purposes
+			prevPumpkinProbe = theBiggestPumpkinProbes[i + 1]
+	return True
+
+# TODO does it work?
+def clearTheBiggestPumpkinProbes(theBiggestPumpkinProbes):
+	while len(theBiggestPumpkinProbes) != 0:
+		theBiggestPumpkinProbes.pop()
+
+def collectTheBiggestPumpkinInfo(theBiggestPumpkinProbes):
+	# collectTheBiggestPumpkinInfoRandomly()
+	collectTheBiggestPumpkinInfoTraversing(theBiggestPumpkinProbes)
+
+def collectTheBiggestPumpkinInfoTraversing(theBiggestPumpkinProbes):
+	for i in range(get_world_size()):
+		theBiggestPumpkinProbes.append(measure())
+		move(North)
+
 
 clear()
 change_hat(Hats.Carrot_Hat)
