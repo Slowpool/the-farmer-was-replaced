@@ -9,6 +9,11 @@ RIGHT_HORIZONTAL_BOUNDARY = 'RIGHT_HORIZONTAL_BOUNDARY'
 
 MIN_THE_BIGGEST_PUMPKIN_PROBES = get_world_size() / 2
 
+Y_BOUNDARY_TRAVERSING_METHOD = 'ybtm'
+RANDOM_TRAVERSING_METHOD = 'rtm'
+FULL_TRAVERSING_METHOD = 'ftm'
+THE_BIGGEST_PUMPKIN_TRAVERSING_METHOD = Y_BOUNDARY_TRAVERSING_METHOD
+
 ownStartPoint = None
 deadPumpkins = []
 
@@ -62,7 +67,7 @@ def plantPumpkinsAsMaster():
 			clearTheBiggestPumpkinProbes(theBiggestPumpkinProbes)
 			collectTheBiggestPumpkinInfo(theBiggestPumpkinProbes)
 		harvest()
-
+		clearTheBiggestPumpkinProbes(theBiggestPumpkinProbes)
 
 def plantPumpkinsOnOwnTerritory():
 	global ownStartPoint
@@ -145,7 +150,7 @@ def thereIsPumpkinBeneath():
 	return get_entity_type() == Entities.Pumpkin
 
 def theBiggestPumpkinIsGrown(theBiggestPumpkinProbes):
-	if len(theBiggestPumpkinProbes) < MIN_THE_BIGGEST_PUMPKIN_PROBES:
+	if not numberOfProbesIsEnough(theBiggestPumpkinProbes):
 		return False
 
 	prevPumpkinProbe = theBiggestPumpkinProbes[0]
@@ -157,6 +162,15 @@ def theBiggestPumpkinIsGrown(theBiggestPumpkinProbes):
 			prevPumpkinProbe = theBiggestPumpkinProbes[i + 1]
 	return True
 
+def numberOfProbesIsEnough(theBiggestPumpkinProbes):
+	if THE_BIGGEST_PUMPKIN_TRAVERSING_METHOD == Y_BOUNDARY_TRAVERSING_METHOD:
+		isEnough = len(theBiggestPumpkinProbes) == 2
+	else:
+		isEnough = len(theBiggestPumpkinProbes) < MIN_THE_BIGGEST_PUMPKIN_PROBES
+
+	return isEnough
+
+
 # TODO does it work?
 def clearTheBiggestPumpkinProbes(theBiggestPumpkinProbes):
 	while len(theBiggestPumpkinProbes) != 0:
@@ -164,14 +178,42 @@ def clearTheBiggestPumpkinProbes(theBiggestPumpkinProbes):
 
 def collectTheBiggestPumpkinInfo(theBiggestPumpkinProbes):
 	# collectTheBiggestPumpkinInfoRandomly()
-	collectTheBiggestPumpkinInfoTraversing(theBiggestPumpkinProbes)
+	# collectTheBiggestPumpkinInfoTraversing(theBiggestPumpkinProbes)
+	collectTheBiggestPumpkinInfoByYBoundaries(theBiggestPumpkinProbes)
 
 def collectTheBiggestPumpkinInfoTraversing(theBiggestPumpkinProbes):
 	for i in range(get_world_size()):
-		theBiggestPumpkinProbes.append(measure())
+		takePumpkinProbe(theBiggestPumpkinProbes)
 		move(North)
 
+def takePumpkinProbe(theBiggestPumpkinProbes):
+	theBiggestPumpkinProbes.append(measure())
 
+def collectTheBiggestPumpkinInfoByYBoundaries(theBiggestPumpkinProbes):
+	if bottomBoundaryIsCloser():
+		firstPosition = getBottomPosition()
+		secondPosition = getTopPosition()
+	else:
+		firstPosition = getTopPosition()
+		secondPosition = getBottomPosition()
+
+	utils.moveToPosition(firstPosition)
+	takePumpkinProbe(theBiggestPumpkinProbes)
+	utils.moveToPosition(secondPosition)
+	takePumpkinProbe(theBiggestPumpkinProbes)
+
+def getTopPosition():
+	global ownStartPoint
+	return {'x': ownStartPoint['x'], 'y': get_world_size() - 1}
+
+def getBottomPosition():
+	global ownStartPoint
+	return {'x': ownStartPoint['x'], 'y': 0}
+
+def bottomBoundaryIsCloser():
+	return get_pos_y() < get_world_size() / 2
+
+harvest()
 clear()
 change_hat(Hats.Carrot_Hat)
 if __name__ == '__main__':
